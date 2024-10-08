@@ -12,7 +12,7 @@ function LoginPage() {
     async function handleLoginSubmit(e) {
         e.preventDefault()
         try {
-            const { data } = await axios.post('http://localhost:4000/login', { email, password }, { withCredentials: true })
+            const { data } = await axios.post('/login', { email, password }, { withCredentials: true })
             setUser(data)
             setRedirect(true)
             alert('Login Successful')
