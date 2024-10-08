@@ -12,7 +12,7 @@ import PlacePage from "./Pages/PlacePage"
 import BookingsPage from "./Pages/BookingsPage"
 import BookingPage from "./Pages/BookingPage"
 
-axios.defaults.baseURL ='http://localhost:4000'
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
 
 function App() {
   return (
