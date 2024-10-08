@@ -95,7 +95,13 @@ app.post('/register', async (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-    mongoose.connect(process.env.MONGO_URL);
+    mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("MongoDB connected");
+}).catch(err => console.error(err));
+
     const { email, password } = req.body;
     const userDoc = await User.findOne({ email: email });
     if (userDoc) {
