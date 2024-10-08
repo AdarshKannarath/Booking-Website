@@ -20,9 +20,13 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads')); 
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://adarsh-booking-website.vercel.app', // Vercel URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
     credentials: true
 }));
+
+
 
 
 
@@ -59,10 +63,16 @@ function getUserDataFromReq(req) {
 }
 
 
-app.get('/test',(req,res)=>{
-    mongoose.connect(process.env.MONGO_URL);
-    res.json("ok")
-})
+app.get('/test', async (req, res) => {
+    try {
+        await mongoose.connect(process.env.MONGO_URL);
+        res.json("ok");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 app.post('/register', async (req, res) => {
     mongoose.connect(process.env.MONGO_URL);
