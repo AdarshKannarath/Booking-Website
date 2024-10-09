@@ -21,7 +21,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(cookieParser());
 app.use(cors({
     //origin: 'https://adarsh-booking-website.vercel.app', // Vercel URL
-    origin: '', // Vercel URL
+    origin: 'https://adarsh-booking-app.vercel.app/', // Vercel URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
     credentials: true
