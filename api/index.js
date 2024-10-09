@@ -27,10 +27,6 @@ app.use(cors({
     credentials: true
 }));
 
-
-
-
-
 const bucket='adarsh-booking-app'
 
 async function uploadToS3(path,originalFilename,mimetype){
@@ -110,7 +106,12 @@ app.post('/login', async (req, res) => {
         if (passwordComparison) {
             jwt.sign({ email: userDoc.email, id: userDoc._id }, jwtSecret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie('token', token).json(userDoc);
+                res.cookie('token', token, {
+                    httpOnly: true, // Prevents JavaScript from accessing the cookie
+                    secure: process.env.NODE_ENV === 'production', // Ensures cookie is sent only over HTTPS in production
+                    sameSite: 'none', // Allows the cookie to be sent in cross-origin requests
+                    domain: 'adarsh-booking-app.vercel.app', // Vercel domain
+                }).json(userDoc);
             });
 
         } else {
