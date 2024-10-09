@@ -1,11 +1,12 @@
 {
-    "buildCommand": "cd AirBnb && npm install && npx vite build",
-    "outputDirectory":"AirBnb/dist",
-    "framework":"vite",
-    "rewrites":[
+    "version": 2,
+    "builds" : [
+        {"src" : "*.js" , "use":"@vercel/node"}
+    ],
+    "routes":[
         {
-            "source":"/api/(.*)",
-            "destination":"/api/index.js"
+            "src":"/(.*)",
+            "dest" : "/"
         }
     ]
 }
